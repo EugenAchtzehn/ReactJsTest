@@ -6,9 +6,11 @@ import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  // <React.StrictMode>
+  //   <App />
+  // </React.StrictMode>
+  // 在 React 18 開發環境下的嚴格模式，會重覆呼叫 useEffect
+  <App />
 );
 
 // If you want to start measuring performance in your app, pass a function
