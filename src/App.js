@@ -16,7 +16,7 @@ function App() {
     isValid: true,
   });
 
-  const timeoutId = setTimeout(validationChange, 2000);
+  const timeoutId = setTimeout(validationChange, 60000);
   function validationChange() {
     const switchedUserInfo = { ...userInfo, isValid: !userInfo.isValid };
     setUserInfo(switchedUserInfo);
@@ -36,9 +36,9 @@ function App() {
           Learn React
         </a>
       </header> */}
-        <main className="flex">
+        <main className="md:flex">
           <div className="bg-slate-700">
-            <img src={logo} className="App-logo" alt="logo" />
+            <img src={logo} className="App-logo mx-auto" alt="logo" />
           </div>
           <MainContent></MainContent>
         </main>

@@ -25,7 +25,7 @@ function MainContent() {
 
   useEffect(() => {
     // 元件掛載後再取得資料
-    fetch('https://randomuser.me/api/')
+    fetch('https://randomuser.me/api/?results=10')
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
@@ -44,11 +44,36 @@ function MainContent() {
     // console.log('select value changes...');
   }
 
-  function filteringFetchData(fetchData) {
-    // console.log(fetchData);
-    const randomName = fetchData.results[0].name;
-    const randomNameFull = `${randomName.title} ${randomName.first} ${randomName.last}`;
-    return randomNameFull;
+  // 塞入一個 results 陣列中的物件
+  function Card({ data }) {
+    return (
+      <div className="w-1/4 px-2">
+        <div className="h-full py-2 rounded shadow-lg bg-amber-100">
+          <img className="block mx-auto my-2" src={data.picture.large} alt="portrait " />
+          <div className="px-6 py-4">
+            <div className="font-bold text-xl mb-2">
+              {`
+              ${String(data.name.title)} ${String(data.name.first)} ${String(data.name.last)}
+            `}
+            </div>
+            <p className="text-gray-700 text-base">
+              Street:
+              {`
+              ${String(data.location.street.name)} ${String(data.location.street.number)}
+            `}
+            </p>
+            <p className="text-gray-700 text-base">City: {data.location.city}</p>
+            <p className="text-gray-700 text-base">State: {String(data.location.state)}</p>
+            <p className="text-gray-700 text-base">Country: {String(data.location.country)}</p>
+          </div>
+          {/* <div className="px-6 pt-4 pb-2">
+          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+            #travel
+          </span>
+        </div> */}
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -56,27 +81,10 @@ function MainContent() {
       {loading ? (
         <div className="api_section">Loading...</div>
       ) : (
-        <div className="api_section flex justify-center py-2">
-          <div className="max-w-sm rounded overflow-auto shadow-lg bg-amber-100">
-            <img className="block mx-auto my-2" src={fetchData.results[0].picture.large} alt="portrait " />
-            <div className="px-6 py-4">
-              <div className="font-bold text-xl mb-2">{filteringFetchData(fetchData)}</div>
-              <p className="text-gray-700 text-base">
-                Street:{' '}
-                {String(fetchData.results[0].location.street.name) +
-                  ', ' +
-                  String(fetchData.results[0].location.street.number)}
-              </p>
-              <p className="text-gray-700 text-base">City: {String(fetchData.results[0].location.city)}</p>
-              <p className="text-gray-700 text-base">State: {String(fetchData.results[0].location.state)}</p>
-              <p className="text-gray-700 text-base">Country: {String(fetchData.results[0].location.country)}</p>
-            </div>
-            {/* <div className="px-6 pt-4 pb-2">
-              <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                #travel
-              </span>
-            </div> */}
-          </div>
+        <div className="api_section flex flex-wrap items-stretch justify-center py-2 gap-y-3">
+          {fetchData.results.map((item) => (
+            <Card key={item.login.uuid} data={item} />
+          ))}
         </div>
       )}
 
@@ -113,7 +121,12 @@ function MainContent() {
       </button>
       <div>
         <label htmlFor="marriageStatus">Toggle Marriage Status:</label>
-        <input type="checkbox" id="marriageStatus" className="ms-2" onClick={() => setMarriage(!marriage)} />
+        <input
+          type="checkbox"
+          id="marriageStatus"
+          className="ms-2"
+          onClick={() => setMarriage(!marriage)}
+        />
         <p>Marriage State Now: {JSON.stringify(marriage)}</p>
       </div>
       <select
