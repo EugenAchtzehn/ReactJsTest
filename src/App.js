@@ -1,5 +1,6 @@
 // React 好像有規定元件命名必須使用大寫
 import MainContent from './MainContent';
+import Footer from './Footer';
 import logo from './logo.svg';
 import './App.css';
 
@@ -22,6 +23,7 @@ function App() {
         </div>
         <MainContent></MainContent>
       </main>
+      <Footer></Footer>
     </div>
   );
 }
