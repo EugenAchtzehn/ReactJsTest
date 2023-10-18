@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { UserContext } from './App';
 
 function MainContent() {
   const initialFarmObj = {
@@ -14,6 +15,10 @@ function MainContent() {
   // setting up a loading message...
   const [loading, setLoading] = useState(true);
   const [fetchData, setFetchData] = useState([]);
+
+  // 由外層元件傳入
+  const userInfo = useContext(UserContext);
+
   // const [fetchData, setFetchData] = useState({
   //   results: [{ name: { title: '', first: '', last: '' } }],
   // });
@@ -120,6 +125,10 @@ function MainContent() {
         <option value={'USA'}>USA</option>
         <option value={'Japan'}>Japan</option>
       </select>
+      <div>
+        <h3>useContext 取得 App.js 的授權訊息：</h3>
+        userInfo isValid: {String(userInfo.isValid)}
+      </div>
     </div>
   );
 }
