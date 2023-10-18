@@ -3,11 +3,10 @@ import { UserContext } from './App';
 
 function MainContent() {
   const initialFarmObj = {
-    owner: 'Johnson',
-    area: 50,
-    horseNum: 3,
-    sheepNum: 15,
-    cowNum: 4,
+    Owner: 'Smith',
+    Horse: 3,
+    Sheep: 15,
+    Cattle: 4,
   };
   const [color, setColor] = useState('red');
   const [marriage, setMarriage] = useState(false);
@@ -47,7 +46,7 @@ function MainContent() {
   // 塞入一個 results 陣列中的物件
   function Card({ data }) {
     return (
-      <div className="w-1/4 px-2">
+      <div className="w-full md:w-1/2 lg:w-1/4 px-2">
         <div className="h-full py-2 rounded shadow-lg bg-amber-100">
           <img className="block mx-auto my-2" src={data.picture.large} alt="portrait " />
           <div className="px-6 py-4">
@@ -97,8 +96,8 @@ function MainContent() {
           placeholder="設定馬的數量"
           onChange={(event) => {
             console.log(event.target.value);
-            const newHorseNum = event.target.value;
-            const newFarmObj = { ...farmObj, horseNum: newHorseNum };
+            const newHorseNum = Number(event.target.value);
+            const newFarmObj = { ...farmObj, Horse: newHorseNum };
             setFarmObj(newFarmObj);
             // setFarmObj()
           }}
