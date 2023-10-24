@@ -8,7 +8,7 @@ function MainContent() {
     Sheep: 15,
     Cattle: 4,
   };
-  const [color, setColor] = useState('red');
+  const [color, setColor] = useState('red'.toUpperCase());
   const [marriage, setMarriage] = useState(false);
   const [farmObj, setFarmObj] = useState(initialFarmObj);
   // setting up a loading message...
@@ -91,7 +91,7 @@ function MainContent() {
         {JSON.stringify(farmObj)}
         <input
           type="number"
-          className="block mx-auto py-2 px-3"
+          className="block mx-auto py-2 px-3 bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500"
           id="setFarmHorse"
           placeholder="設定馬的數量"
           onChange={(event) => {
@@ -107,25 +107,20 @@ function MainContent() {
       <button
         type="button"
         className="border border-blue-200 bg-blue-200 text-gray-700 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-blue-300 focus:outline-none focus:shadow-outline"
-        onClick={() => setColor('blue')}
+        onClick={() => setColor('blue'.toUpperCase())}
       >
         Blue
       </button>
       <button
         className="border border-pink-200 bg-pink-200 text-gray-700 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-pink-300 focus:outline-none focus:shadow-outline"
         type="button"
-        onClick={() => setColor('pink')}
+        onClick={() => setColor('pink'.toUpperCase())}
       >
         Pink
       </button>
       <div>
         <label htmlFor="marriageStatus">Toggle Marriage Status:</label>
-        <input
-          type="checkbox"
-          id="marriageStatus"
-          className="ms-2"
-          onClick={() => setMarriage(!marriage)}
-        />
+        <input type="checkbox" id="marriageStatus" className="ms-2" onClick={() => setMarriage(!marriage)} />
         <p>Marriage State Now: {JSON.stringify(marriage)}</p>
       </div>
       <select

@@ -16,7 +16,7 @@ function App() {
     isValid: true,
   });
 
-  const timeoutId = setTimeout(validationChange, 60000);
+  const timeoutId = setTimeout(validationChange, 30000);
   function validationChange() {
     const switchedUserInfo = { ...userInfo, isValid: !userInfo.isValid };
     setUserInfo(switchedUserInfo);
